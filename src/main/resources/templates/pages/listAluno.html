@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+  <div th:replace="fragments/header :: header"></div>
+
+  <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+
+	<div th:replace="fragments/navigation :: nav"></div>
+    
+    <div class="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs -->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Aluno</a>
+          </li>
+          <li class="breadcrumb-item active">Ver Todos</li>
+        </ol>
+       
+        <!-- Example Tables Card -->
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="table-responsive">
+              	<table id="example" class="display nowrap" cellspacing="0" width="100%">
+		   		</table>	
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- /.container-fluid -->
+
+    </div>
+    <!-- /.content-wrapper -->
+
+    <div th:replace="fragments/footer :: footer"></div>
+
+    <!-- Scroll to Top Button -->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
+
+   <!-- Logout Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Deseja sair?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <a class="btn btn-primary" href="login.html">Sair</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="modal fade" id="modaltst" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+             <div class="row">
+          			<div class="col-md-6">
+          				<div class="form-group">
+						    <label for="name">Nome</label>
+						    <input type="text" class="form-control" id="nameModal" name="nameModal"/>
+						  	 <input type="hidden" class="form-control" id="idModal" name="idModal"/>
+						  </div>
+          			</div>
+          			<div class="col-md-4">
+          				<div class="form-group" id="cursos">
+						    <label for="curso">Cursos</label>
+						    <select class="form-control typeahead" id="cursoModal" name="cursoModal">
+						    </select>
+						</div>
+          			</div>
+          			<div class="col-md-2">
+          				<div class="form-group">
+						    <label for="ra">RA</label>
+						    <input type="text" class="form-control" id="raModal" name="raModal"/>
+						  </div>
+          			</div>
+          		</div>
+          		<div class="row">
+          			<div class="col-md-2">
+          				<div class="form-group">
+						    <label for="dtNasc">Data de Nascimento</label>
+						    <input type="text" class="form-control" id="dtNascModal" name="dtNascModal"/>
+						  </div>
+          			</div>
+          			<div class="col-md-3">
+          				<div class="form-group">
+						    <label for="cpf">CPF</label>
+						    <input type="text" class="form-control" name="cpfModal" id="cpfModal"/>
+						  </div>
+          			</div>
+          			<div class="col-md-3">
+          				<div class="form-group">
+						    <label for="rg">RG</label>
+						    <input type="text" class="form-control" id="rgModal" name="rgModal"/>
+						  </div>
+          			</div>
+          		</div>
+          		<div class="row">
+          			<div class="col-md-2">
+          				<div class="form-group">
+						    <label for="sexo">Sexo</label>
+						    <input type="text" class="form-control" id="sexoModal" name="sexoModal"/>
+						  </div>
+          			</div>
+          			<div class="col-md-4">
+          				<div class="form-group">
+						    <label for="tel">Telefone</label>
+						    <input type="text" class="form-control" name="telModal" id="telModal"/>
+						  </div>
+          			</div>
+          			<div class="col-md-4">
+          				<div class="form-group">
+						    <label for="email">Email</label>
+						    <input type="text" class="form-control" name="emailModal" id="emailModal"/>
+						  </div>
+          			</div>
+          		</div>
+          </div>
+          <div class="modal-footer">
+          	<button type="button" id="cancel" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" id="delete" class="btn btn-primary" >Excluir</button>
+            <button type="button" id="udpate" class="btn btn-primary" >Alterar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+
+  </body>
+  <script type="text/javascript" src="init/initAluno.js"></script>
+  <script type="text/javascript" src="js/bootstrap-notify.min.js"></script>
+
+</html>
