@@ -2,67 +2,165 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 
-  <div th:replace="fragments/header :: header"></div>
+<div th:replace="fragments/header :: header"></div>
 
-  <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+<script src="http://github.hubspot.com/odometer/odometer.js"></script>
+<link rel="stylesheet"
+	href="http://github.hubspot.com/odometer/themes/odometer-theme-default.css" />
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+	integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+	crossorigin="anonymous" />
+<script type="text/javascript" src="js/bootstrap-notify.min.js"></script>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
 
 	<div th:replace="fragments/navigation :: nav"></div>
-    
-    <div class="content-wrapper">
 
-      <div class="container-fluid">
+	<div class="content-wrapper">
 
-        <!-- Breadcrumbs -->
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="#">Dashboard</a>
-          </li>
-          <li class="breadcrumb-item active">My Dashboard</li>
-        </ol>
-       
-        <!-- Example Tables Card -->
-        <div class="card mb-3">
-          <div class="card-body">
-            <div class="table-responsive">
-            </div>
-          </div>
-        </div>
+		<div class="container-fluid">
 
-      </div>
-      <!-- /.container-fluid -->
+			<!-- Breadcrumbs -->
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+				<li class="breadcrumb-item active">My Dashboard</li>
+			</ol>
 
-    </div>
-    <!-- /.content-wrapper -->
+			<!-- Example Tables Card -->
+			<div class="card mb-3">
+				<div class="card-body">
 
-    <div th:replace="fragments/footer :: footer"></div>
 
-    <!-- Scroll to Top Button -->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fa fa-angle-up"></i>
-    </a>
+					<div class="container">
+						<div class="row">
+							<div class="col col-lg-5">
+								<h1>Total de Livros</h1>
+								<h3 id="odometer" class="odometer"
+									style="color: rgba(13, 142, 1, 0.6)">0</h3>
+							</div>
+						</div>
+						<br />
+						<div class="row">
+							<div class="col col-lg-4">
+								<h1>Emprestimos</h1>
+								<canvas id="myChart" width="400" height="400"></canvas>
+							</div>
+							<div class="col col-lg-5 offset-lg-3">
+								<h1>Por curso</h1>
+								<br />
+								<h5>
+									Redes <label style="color: rgba(13, 142, 1, 0.6)">5446</label>
+								</h5>
+								<h5>
+									Redes <label style="color: rgba(13, 142, 1, 0.6)">5446</label>
+								</h5>
+								<h5>
+									Redes <label style="color: rgba(13, 142, 1, 0.6)">5446</label>
+								</h5>
+								<h5>
+									Redes <label style="color: rgba(13, 142, 1, 0.6)">5446</label>
+								</h5>
+							</div>
+						</div>
+					</div>
 
-    <!-- Logout Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Deseja sair?</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <a class="btn btn-primary" href="login.html">Sair</a>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    
 
-  </body>
+					<!-- Optional JavaScript -->
+					<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+					<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+						integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+						crossorigin="anonymous"></script>
+					<script
+						src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+						integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+						crossorigin="anonymous"></script>
+					<script
+						src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+						integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+						crossorigin="anonymous"></script>
+					<script>
+						var ctx = document.getElementById("myChart")
+								.getContext('2d');
+						var myChart = new Chart(ctx, {
+							type : 'pie',
+							data : {
+								labels : [ "Atraso", "No prazo" ],
+								datasets : [ {
+									label : '# of Votes',
+									data : [ 12, 49 ],
+									backgroundColor : [ 'rgba(142, 0, 0, 0.6)',
+											'rgba(13, 142, 1, 0.6)'
+
+									],
+									borderColor : [ 'rgba(142, 0, 0, 1)',
+											'rgba(13, 142, 1, 1)' ],
+									borderWidth : 1
+								} ]
+							}
+						});
+						$.ajax({
+							url : 'http://localhost:8080/livro/findAll',
+							async : true,
+							type : 'GET',
+							contentType : "application/json",
+							success : function(response) {
+								console.log(response.length);
+								setTimeout(function() {
+									odometer.innerHTML = response.length;
+								}, 1000);
+							},
+							error : function(response) {
+								console.log(response);
+							}
+						});
+					</script>
+
+
+
+				</div>
+			</div>
+
+		</div>
+		<!-- /.container-fluid -->
+
+	</div>
+	<!-- /.content-wrapper -->
+
+	<div th:replace="fragments/footer :: footer"></div>
+
+	<!-- Scroll to Top Button -->
+	<a class="scroll-to-top rounded" href="#page-top"> <i
+		class="fa fa-angle-up"></i>
+	</a>
+
+	<!-- Logout Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Deseja sair?</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body"></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Cancelar</button>
+					<a class="btn btn-primary" href="login.html">Sair</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+</body>
 
 </html>
