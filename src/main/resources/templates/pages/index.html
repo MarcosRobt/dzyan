@@ -102,21 +102,7 @@
 								} ]
 							}
 						});
-						$.ajax({
-							url : 'http://localhost:8080/livro/findAll',
-							async : true,
-							type : 'GET',
-							contentType : "application/json",
-							success : function(response) {
-								console.log(response.length);
-								setTimeout(function() {
-									odometer.innerHTML = response.length;
-								}, 1000);
-							},
-							error : function(response) {
-								console.log(response);
-							}
-						});
+						
 					</script>
 
 
@@ -159,8 +145,8 @@
 		</div>
 	</div>
 
-
-
 </body>
 
+<script type="text/javascript" src="init/init.js"></script>
+<script type="text/javascript" src="js/bootstrap-notify.min.js"></script>
 </html>
