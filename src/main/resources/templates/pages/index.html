@@ -4,9 +4,7 @@
 
 <div th:replace="fragments/header :: header"></div>
 
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
-<script src="http://github.hubspot.com/odometer/odometer.js"></script>
+
 <link rel="stylesheet"
 	href="http://github.hubspot.com/odometer/themes/odometer-theme-default.css" />
 <link rel="stylesheet"
@@ -33,94 +31,77 @@
 			<div class="card mb-3">
 				<div class="card-body">
 
-
-					<div class="container">
-						<div class="row">
-							<div class="col col-lg-5">
-								<h1>Total de Livros</h1>
-								<h3 id="odometer" class="odometer"
-									style="color: rgba(13, 142, 1, 0.6)">0</h3>
+					<div class="row">
+						<div class="col-xs-6 col-md-3 col-lg-3">
+							<div class="panel border-right">
+								<div class="row center-content">
+									<em class="fa fa-2x fa-book color-blue"></em>
+								</div>
+								<div class="row center-content">
+									<h5 class="large odometer" id="odometer"></h5>
+								</div>
+								<div class="row center-content">
+									<span class="text-muted">Livros</span>
+								</div>
 							</div>
 						</div>
-						<br />
-						<div class="row">
-							<div class="col col-lg-4">
-								<h1>Emprestimos</h1>
-								<canvas id="myChart" width="400" height="400"></canvas>
+						<div class="col-xs-6 col-md-3 col-lg-3 ">
+							<div class="panel border-right">
+								<div class="row center-content">
+									<em class="fa fa-2x fa-exchange color-orange"></em>
+								</div>
+								<div class="row center-content">
+									<h5 class="large">52</h5>
+								</div>
+								<div class="row center-content">
+									<span class="text-muted">Livros</span>
+								</div>
 							</div>
-							<div class="col col-lg-5 offset-lg-3">
-								<h1>Por curso</h1>
-								<br />
-								<h5>
-									Redes <label style="color: rgba(13, 142, 1, 0.6)">5446</label>
-								</h5>
-								<h5>
-									Redes <label style="color: rgba(13, 142, 1, 0.6)">5446</label>
-								</h5>
-								<h5>
-									Redes <label style="color: rgba(13, 142, 1, 0.6)">5446</label>
-								</h5>
-								<h5>
-									Redes <label style="color: rgba(13, 142, 1, 0.6)">5446</label>
-								</h5>
+						</div>
+						<div class="col-xs-6 col-md-3 col-lg-3 ">
+							<div class="panel border-right">
+								<div class="row center-content">
+									<em class="fa fa-2x fa-thumbs-up color-teal"></em>
+								</div>
+								<div class="row center-content">
+									<h5 class="large">24%</h5>
+								</div>
+								<div class="row center-content">
+									<span class="text-muted">Livros</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-6 col-md-3 col-lg-3 ">
+							<div class="panel">
+								<div class="row center-content">
+									<em class="fa fa-2x fa-thumbs-down color-red"></em>
+								</div>
+								<div class="row center-content">
+									<h5 class="large">32%</h5>
+								</div>
+								<div class="row center-content">
+									<span class="text-muted">Livros</span>
+								</div>
 							</div>
 						</div>
 					</div>
+				</div>
+			</div>
 
-
-
-					<!-- Optional JavaScript -->
-					<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-					<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-						integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-						crossorigin="anonymous"></script>
-					<script
-						src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-						integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-						crossorigin="anonymous"></script>
-					<script
-						src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
-						integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-						crossorigin="anonymous"></script>
-					<script>
-						var ctx = document.getElementById("myChart")
-								.getContext('2d');
-						var myChart = new Chart(ctx, {
-							type : 'pie',
-							data : {
-								labels : [ "Atraso", "No prazo" ],
-								datasets : [ {
-									label : '# of Votes',
-									data : [ 12, 49 ],
-									backgroundColor : [ 'rgba(142, 0, 0, 0.6)',
-											'rgba(13, 142, 1, 0.6)'
-
-									],
-									borderColor : [ 'rgba(142, 0, 0, 1)',
-											'rgba(13, 142, 1, 1)' ],
-									borderWidth : 1
-								} ]
-							}
-						});
-						$.ajax({
-							url : 'http://localhost:8080/livro/findAll',
-							async : true,
-							type : 'GET',
-							contentType : "application/json",
-							success : function(response) {
-								console.log(response.length);
-								setTimeout(function() {
-									odometer.innerHTML = response.length;
-								}, 1000);
-							},
-							error : function(response) {
-								console.log(response);
-							}
-						});
-					</script>
-
-
-
+			<div class="card mb-3">
+				<div class="card-header">Emprestimos</div>
+				<div class="card-body">
+					<div class="panel panel-container">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="canvas-wrapper">
+									<canvas class="main-chart" id="line-chart" height="200"
+										width="600"></canvas>
+								</div>
+							</div>
+						</div>
+						<!--/.row-->
+					</div>
 				</div>
 			</div>
 
@@ -163,4 +144,5 @@
 
 </body>
 
+<script type="text/javascript" src="init/init.js"></script>
 </html>

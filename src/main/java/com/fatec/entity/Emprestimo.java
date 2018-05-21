@@ -15,6 +15,7 @@ public class Emprestimo {
     private Long idLivro;
     private String dataEmprestimo;
     private String dataDevolucao;
+    private String statusEmprestimo;
     
     
 	public Emprestimo() {
@@ -53,6 +54,14 @@ public class Emprestimo {
 	}
 	public Long getIdEmprestimo() {
 		return idEmprestimo;
+	}
+
+	public String getStatusEmprestimo() {
+		return statusEmprestimo;
+	}
+
+	public void setStatusEmprestimo(String statusEmprestimo) {
+		this.statusEmprestimo = statusEmprestimo;
 	}
     
     
