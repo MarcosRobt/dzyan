@@ -21,12 +21,13 @@ public class Emprestimo {
 	public Emprestimo() {
 	}
 	
-	public Emprestimo(Long idAluno, Long idLivro, String dataEmprestimo, String dataDevolucao) {
+	public Emprestimo(Long idAluno, Long idLivro, String dataEmprestimo, String dataDevolucao, String statusEmprestimo) {
 		super();
 		this.idAluno = idAluno;
 		this.idLivro = idLivro;
 		this.dataEmprestimo = dataEmprestimo;
 		this.dataDevolucao = dataDevolucao;
+		this.statusEmprestimo = statusEmprestimo;
 	}
 	public Long getIdAluno() {
 		return idAluno;
