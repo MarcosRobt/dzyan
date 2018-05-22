@@ -153,7 +153,7 @@ $(document).ready(function() {
 			
 		$.each(data, function (i, item) {
             $('#curso').append($('<option>', { 
-                value: item.siglaCurso,
+                value: item.idCurso,
                 text : item.nomeCurso 
             }));
         });

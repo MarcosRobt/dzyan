@@ -1,5 +1,9 @@
 package com.fatec.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fatec.entity.Emprestimo;
-import com.fatec.entity.Livro;
 import com.fatec.repository.EmprestimoRepository;
 
 @RestController
@@ -25,6 +28,21 @@ public class EmprestimoController {
         return repository.findAll();
     }
 	
+	@GetMapping("/findActives")
+    public Iterable<Emprestimo> findActives() {
+		
+        return repository.findByStatusEmprestimo(new String("1"));
+    }
+	
+	@GetMapping("/countByDataDevolucaoBefore/{date}")
+    public Long countByDataDevolucaoBefore(@PathVariable String date) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date dataValida = sdf.parse(date);
+		
+		Long result = repository.countByDataDevolucaoBeforeAndStatusEmprestimo(dataValida,new String("1"));
+        return result;
+    }
+	
 	@GetMapping("/findById/{id}")
 	public Emprestimo findByIdEmprestimo(@PathVariable Long id) {
 		Emprestimo emprestimo = repository.findByIdEmprestimo(id);
@@ -32,15 +50,15 @@ public class EmprestimoController {
 	}
 	
 	@GetMapping("/findByIdAluno/{id}")
-	public Emprestimo findByIdAluno(@PathVariable Long id) {
-		Emprestimo emprestimo = repository.findByIdAluno(id);
-	    return emprestimo;
+	public Iterable<Emprestimo> findByIdAluno(@PathVariable Long id) {
+		
+	    return repository.findByIdAluno(id);
 	}
 	
 	@GetMapping("/findByIdLivro/{id}")
-	public Emprestimo findByIdLivro(@PathVariable Long id) {
-		Emprestimo emprestimo = repository.findByIdLivro(id);
-	    return emprestimo;
+	public Iterable<Emprestimo> findByIdLivro(@PathVariable Long id) {
+		
+	    return repository.findByIdLivro(id);
 	}
 	
 	@PostMapping("/create")

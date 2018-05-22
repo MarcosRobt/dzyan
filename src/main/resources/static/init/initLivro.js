@@ -79,7 +79,7 @@ $(document).ready(function() {
 	    		success:function(response){
 	    			$.notify({
 	    				// options
-	    				message: 'Curso cadastrado com sucesso!' 
+	    				message: 'Livro cadastrado com sucesso!' 
 	    			},{
 	    				// settings
 	    				type: 'info',

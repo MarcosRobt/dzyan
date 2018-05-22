@@ -1,5 +1,7 @@
 package com.fatec.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,15 +15,14 @@ public class Emprestimo {
 	private Long idEmprestimo;
     private Long idAluno;
     private Long idLivro;
-    private String dataEmprestimo;
-    private String dataDevolucao;
+    private Date dataEmprestimo;
+    private Date dataDevolucao;
     private String statusEmprestimo;
-    
     
 	public Emprestimo() {
 	}
 	
-	public Emprestimo(Long idAluno, Long idLivro, String dataEmprestimo, String dataDevolucao, String statusEmprestimo) {
+	public Emprestimo(Long idAluno, Long idLivro, Date dataEmprestimo, Date dataDevolucao, String statusEmprestimo) {
 		super();
 		this.idAluno = idAluno;
 		this.idLivro = idLivro;
@@ -41,28 +42,26 @@ public class Emprestimo {
 	public void setIdLivro(Long idLivro) {
 		this.idLivro = idLivro;
 	}
-	public String getDataEmprestimo() {
+	public Date getDataEmprestimo() {
 		return dataEmprestimo;
 	}
-	public void setDataEmprestimo(String dataEmprestimo) {
+	public void setDataEmprestimo(Date dataEmprestimo) {
 		this.dataEmprestimo = dataEmprestimo;
 	}
-	public String getDataDevolucao() {
+	public Date getDataDevolucao() {
 		return dataDevolucao;
 	}
-	public void setDataDevolucao(String dataDevolucao) {
+	public void setDataDevolucao(Date dataDevolucao) {
 		this.dataDevolucao = dataDevolucao;
 	}
 	public Long getIdEmprestimo() {
 		return idEmprestimo;
 	}
-
-	public String getStatusEmprestimo() {
-		return statusEmprestimo;
-	}
-
 	public void setStatusEmprestimo(String statusEmprestimo) {
 		this.statusEmprestimo = statusEmprestimo;
+	}
+	public String getStatusEmprestimo() {
+		return statusEmprestimo;
 	}
     
     
@@ -71,4 +70,3 @@ public class Emprestimo {
     
 
 }
-
