@@ -1,6 +1,5 @@
 $(document).ready(
 		function() {
-
 			$.ajax({
 				url : 'http://localhost:8080/livro/findAll',
 				async : true,
