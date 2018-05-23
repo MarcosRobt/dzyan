@@ -29,9 +29,9 @@ public class EmprestimoController {
     }
 	
 	@GetMapping("/findActives")
-    public Iterable<Emprestimo> findActives() {
+    public Long findActives() {
 		
-        return repository.findByStatusEmprestimo(new String("1"));
+        return repository.countByStatusEmprestimo(new String("1"));
     }
 	
 	@GetMapping("/countByDataDevolucaoBefore/{date}")
@@ -39,7 +39,16 @@ public class EmprestimoController {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date dataValida = sdf.parse(date);
 		
-		Long result = repository.countByDataDevolucaoBeforeAndStatusEmprestimo(dataValida,new String("1"));
+		Long result = repository.countByDataDevolucaoLessThanAndStatusEmprestimo(dataValida,new String("1"));
+        return result;
+    }
+	
+	@GetMapping("/countByDataDevolucaoAfter/{date}")
+    public Long countByDataDevolucaoAfter(@PathVariable String date) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date dataValida = sdf.parse(date);
+		
+		Long result = repository.countByDataDevolucaoGreaterThanEqualAndStatusEmprestimo(dataValida,new String("1"));
         return result;
     }
 	

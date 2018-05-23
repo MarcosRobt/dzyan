@@ -23,9 +23,9 @@ $(document)
 						type : 'GET',
 						contentType : "application/json",
 						success : function(response) {
-							console.log(response.length);
+							console.log(response);
 							setTimeout(function() {
-								emprestimos.innerHTML = response.length;
+								emprestimos.innerHTML = response;
 							}, 1000);
 						},
 						error : function(response) {
@@ -42,9 +42,25 @@ $(document)
 						type : 'GET',
 						contentType : "application/json",
 						success : function(response) {
-							console.log(response.length);
+							console.log(response);
 							setTimeout(function() {
-								atraso.innerHTML = response.length;
+								atraso.innerHTML = response;
+							}, 1000);
+						},
+						error : function(response) {
+							console.log(response);
+						}
+					});
+					
+					$.ajax({
+						url : 'http://localhost:8080/emprestimo/countByDataDevolucaoAfter/'+ data,
+						async : false,
+						type : 'GET',
+						contentType : "application/json",
+						success : function(response) {
+							console.log(response);
+							setTimeout(function() {
+								noPrazo.innerHTML = response;
 							}, 1000);
 						},
 						error : function(response) {
