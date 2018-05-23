@@ -67,6 +67,25 @@ $(document)
 							console.log(response);
 						}
 					});
+					
+					var meses = 12;
+					var qtdPorMeses = [];
+					for(var i = 1;i <= 12; i++){
+						
+						$.ajax({
+							url : 'http://localhost:8080/emprestimo/countByMonth/'+ i,
+							async : false,
+							type : 'GET',
+							contentType : "application/json",
+							success : function(response) {
+								qtdPorMeses.push(response);
+							},
+							error : function(response) {
+								console.log(response);
+							}
+						});
+						
+					}
 
 					var ctx = document.getElementById("line-chart").getContext(
 							"2d");
@@ -79,8 +98,7 @@ $(document)
 									"Novembro", "Dezembro" ],
 							datasets : [ {
 								label : 'Mês',
-								data : [ 65, 80, 81, 78, 89, 78, 98, 80, 0, 0,
-										0, 0 ],
+								data :qtdPorMeses,
 
 								backgroundColor : [ 'rgba(142, 0, 0, 0.5)'
 

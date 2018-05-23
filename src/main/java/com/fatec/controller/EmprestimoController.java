@@ -34,6 +34,12 @@ public class EmprestimoController {
         return repository.countByStatusEmprestimo(new String("1"));
     }
 	
+	@GetMapping("/countByMonth/{month}")
+    public Long countByMonth(@PathVariable Integer month){
+		
+        return repository.countByMonth(month);
+    }
+	
 	@GetMapping("/countByDataDevolucaoBefore/{date}")
     public Long countByDataDevolucaoBefore(@PathVariable String date) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
