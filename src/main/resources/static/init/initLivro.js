@@ -46,6 +46,7 @@ $(document).ready(function() {
 		contentType: "application/json",
 		success:function(data){
 			$('#example').DataTable( {
+				responsive: 	true,
 		        data:			data,
 		        language:		idioma,
 		        columns:		colunas
