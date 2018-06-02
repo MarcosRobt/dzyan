@@ -61,4 +61,9 @@ public class AccessController {
 		return "pages/cadCurso";
 	}
 	
+	@GetMapping("listEmp")
+	public String cadCurso() {
+		return "pages/listEmp";
+	}
+	
 }
