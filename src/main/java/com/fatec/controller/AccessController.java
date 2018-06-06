@@ -62,7 +62,7 @@ public class AccessController {
 	}
 	
 	@GetMapping("listEmp")
-	public String cadCurso() {
+	public String listEmp() {
 		return "pages/listEmp";
 	}
 	

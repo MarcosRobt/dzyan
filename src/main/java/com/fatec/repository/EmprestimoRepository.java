@@ -16,6 +16,8 @@ public interface EmprestimoRepository extends CrudRepository<Emprestimo, Long> {
 	
 	Iterable<Emprestimo> findByIdLivro(Long id);
 	
+	Iterable<Emprestimo> findByStatusEmprestimo(String status);
+	
 	Long countByStatusEmprestimo(String status);
 	
 	Long countByDataDevolucaoLessThanAndStatusEmprestimo(Date data, String status);

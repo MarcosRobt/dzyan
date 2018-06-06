@@ -28,6 +28,12 @@ public class EmprestimoController {
         return repository.findAll();
     }
 	
+	@GetMapping("/findAllActives")
+    public Iterable<Emprestimo> findAllActives() {
+		
+        return repository.findByStatusEmprestimo(new String("1"));
+    }
+	
 	@GetMapping("/findActives")
     public Long findActives() {
 		
