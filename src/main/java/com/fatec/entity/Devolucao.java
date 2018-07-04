@@ -1,5 +1,7 @@
 package com.fatec.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,14 +14,14 @@ public class Devolucao {
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private Long idDevolucao;
     private Long idEmprestimo;
-    private String dataDevolucao;
+    private Date dataDevolucao;
     
     
     
 	public Devolucao() {
 	}
 	
-	public Devolucao(Long idEmprestimo, String dataDevolucao) {
+	public Devolucao(Long idEmprestimo, Date dataDevolucao) {
 		super();
 		this.idEmprestimo = idEmprestimo;
 		this.dataDevolucao = dataDevolucao;
@@ -30,10 +32,10 @@ public class Devolucao {
 	public void setIdEmprestimo(Long idEmprestimo) {
 		this.idEmprestimo = idEmprestimo;
 	}
-	public String getDataDevolucao() {
+	public Date getDataDevolucao() {
 		return dataDevolucao;
 	}
-	public void setDataDevolucao(String dataDevolucao) {
+	public void setDataDevolucao(Date dataDevolucao) {
 		this.dataDevolucao = dataDevolucao;
 	}
 	public Long getIdDevolucao() {

@@ -27,11 +27,11 @@ $(document).ready(function() {
 		};
 	
 	var colunas = [
-        {data: "idEmprestimo",	title: 'Id', "visible": true},
+        {data: "idEmprestimo",	title: 'Codigo Emprestimo', "visible": true},
         {data: "idAluno", 		title: 'Aluno', "visible": true },
         {data: "idLivro", 		title: 'Livro', "visible": true },
         {data: "dataEmprestimo",title: 'Data Empréstimo', "visible": true },
-        {data: "dataDevolucao", title: 'Data Devolução', "visible": true },
+        {data: "dataDevolucao", title: 'Data Devolução Prevista', "visible": true },
         {data: 'consultar',		title: "", "visible": true }
     ];
 	
