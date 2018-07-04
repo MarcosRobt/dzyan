@@ -66,4 +66,9 @@ public class AccessController {
 		return "pages/listEmp";
 	}
 	
+	@GetMapping("listDev")
+	public String listDev() {
+		return "pages/listDev";
+	}
+	
 }
