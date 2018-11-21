@@ -60,6 +60,17 @@ public class LivroController {
     @PostMapping("/updateById")
     public Livro updateById(@RequestBody Livro livroRequest) {
     	Livro livro = repository.findByIdLivro(livroRequest.getIdLivro());
+    	
+    	livro.setTituloLivro(livroRequest.getTituloLivro());
+    	livro.setSubtituloLivro(livroRequest.getSubtituloLivro());
+    	livro.setAutorLivro(livroRequest.getAutorLivro());
+    	livro.setAnoLivro(livroRequest.getAnoLivro());
+    	livro.setGeneroLivro(livroRequest.getGeneroLivro());
+    	livro.setEdicaoLivro(livroRequest.getEdicaoLivro());
+    	livro.setEditoraLivro(livroRequest.getEditoraLivro());
+    	livro.setIsbnLivro(livroRequest.getIsbnLivro());
+    	livro.setPaginasLivro(livroRequest.getPaginasLivro());
+    	
     	repository.save(livro);
         return livro;
     }

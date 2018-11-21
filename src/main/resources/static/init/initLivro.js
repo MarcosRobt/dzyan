@@ -29,14 +29,13 @@ $(document).ready(function() {
 	var colunas = [
         {data: "idLivro", 		title: 'Id', "visible": true},
         {data: "tituloLivro", 	title: 'Título', "visible": true },
-        {data: "subtituloLivro",title: 'SubTítulo', "visible": true },
         {data: "autorLivro", 	title: 'Autor', "visible": true },
         {data: "anoLivro", 		title: 'Ano', "visible": true },
         {data: "generoLivro",	title: 'Gênero', "visible": true },
         {data: "editoraLivro",	title: 'Editora', "visible": true },
         {data: "edicaoLivro", 	title: 'Edição', "visible": true },
         {data: "isbnLivro", 	title: 'ISBN', "visible": true },
-        {data: "paginasLivro", 	title: 'Páginas', "visible": true }
+        {data: 'consultar',		title: "", "visible": true }
     ];
 	
 	$.ajax({
@@ -49,7 +48,14 @@ $(document).ready(function() {
 				responsive: 	true,
 		        data:			data,
 		        language:		idioma,
-		        columns:		colunas
+		        columns:		colunas,
+		        columnDefs: [
+					{
+		                  "targets": 8,
+		                  "data": null,
+		                  "defaultContent": "<a href='#'><span onClick='openModal(this)' id='editModal' class='fa fa-pencil-square-o fa-3'></span></a>"
+		              }
+				],
 		    } );
 		},
 		error: function(data){			
@@ -119,8 +125,171 @@ $(document).ready(function() {
 		}
 	});
 	
+	$("#udpate").click(function() {
+		var obj;
+		
+		$.ajax({
+    	    url: 'http://localhost:8080/livro/findById/'+parseInt($("#idModal").val()),
+    	    async: true,
+    		type: 'GET',
+    		contentType: "application/json",
+    		success:function(response){
+    			
+    		},error:	function(response){			
+    			$.notify({
+    				// options
+    				message: 'Erro na operação, contato um administrador.' 
+    			},{
+    				// settings
+    				type: 'danger',
+    				placement: {
+    					from: "top",
+    					align: "center"
+    				}
+    			});
+    		},complete:function(data){
+    			
+    			var response = data.responseJSON;
+    			var livro = '{'
+    				+'"idLivro": '+parseInt($("#idModal").val())+','
+    		        +'"tituloLivro": "'+ $("#tituloLivro").val()+'",'
+    		        +'"subtituloLivro":" '+$("#subtituloLivro").val()+'",'
+    		        +'"autorLivro": "'+ $("#autorLivro").val()+'",'
+    		        +'"anoLivro": "'+$("#anoLivro").val()+'",'
+    		        +'"generoLivro": "'+ $("#generoLivro").val()+'",'
+    		        +'"editoraLivro": "'+ $("#editoraLivro").val()+'",'
+    		        +'"edicaoLivro": "'+ $("#edicaoLivro").val()+'",'
+    		        +'"isbnLivro": "'+ $("#isbnLivro").val()+'",'
+    		        +'"paginasLivro": '+ parseInt($("#paginasLivro").val())+'}';
+    			
+    			$.ajax({
+    	    	    url: 'http://localhost:8080/livro/updateById',
+    	    	    async: false ,
+    	    		type: 'POST',
+    	    		data: livro,
+    	    		contentType: "application/json",
+    	    		success:function(response){
+    	    			$.notify({
+    	    				// options
+    	    				message: 'Livro alterado!' 
+    	    			},{
+    	    				// settings
+    	    				type: 'info',
+    	    				placement: {
+    	    					from: "top",
+    	    					align: "center"
+    	    				}
+    	    			});
+    	    			$("#cancel").click();
+//    	    			location.reload();
+    	    		},error:	function(response){			
+    	    			$.notify({
+    	    				// options
+    	    				message: 'Erro na operação, contato um administrador.' 
+    	    			},{
+    	    				// settings
+    	    				type: 'danger',
+    	    				placement: {
+    	    					from: "top",
+    	    					align: "center"
+    	    				}
+    	    			});
+    	    		}
+    	        });
+    		}
+        });
+		
+	});
+	
+	$("#delete").click(function() {
+		var livro = '{'
+			+'"idLivro": '+parseInt($("#idModal").val())+','
+	        +'"tituloLivro": "'+ $("#tituloLivro").val()+'",'
+	        +'"subtituloLivro": '+$("#subtituloLivro").val()+','
+	        +'"autorLivro": "'+ $("#autorLivro").val()+'",'
+	        +'"anoLivro": "'+$("#anoLivro").val()+'",'
+	        +'"generoLivro": "'+ $("#generoLivro").val()+'",'
+	        +'"editoraLivro": "'+ $("#editoraLivro").val()+'",'
+	        +'"edicaoLivro": "'+ $("#edicaoLivro").val()+'",'
+	        +'"isbnLivro": "'+ $("#isbnLivro").val()+'",'
+	        +'"paginasLivro": "'+ parseInt($("#paginasLivro").val())+'"'
+	        +'}';
+		
+		$.ajax({
+    	    url: 'http://localhost:8080/livro/deleteById/'+parseInt($("#idModal").val()),
+    	    async: true,
+    		type: 'DELETE',
+    		contentType: "application/json",
+    		success:function(response){
+    			$.notify({
+    				// options
+    				message: 'Livro excluido!' 
+    			},{
+    				// settings
+    				type: 'info',
+    				placement: {
+    					from: "top",
+    					align: "center"
+    				}
+    			});
+    			location.reload();
+    		},error:	function(response){			
+    			$.notify({
+    				// options
+    				message: 'Erro na operação, contato um administrador.' 
+    			},{
+    				// settings
+    				type: 'danger',
+    				placement: {
+    					from: "top",
+    					align: "center"
+    				}
+    			});
+    		}
+        });
+		
+	});
+	
 	
 });
+
+function openModal(obj){
+	
+	var linha = $($(obj).parents('tr')).children();
+	
+	$.ajax({
+	    url: 'http://localhost:8080/livro/findById/'+parseInt(linha[0].innerText),
+	    async: true,
+		type: 'GET',
+		contentType: "application/json",
+		success:function(response){
+			$("#idModal").val(response.idLivro);
+			$("#tituloLivro").val(response.tituloLivro);
+			$("#subtituloLivro").val(response.subtituloLivro);
+			$("#autorLivro").val(response.autorLivro);
+			$("#anoLivro").val(response.anoLivro);
+			$("#generoLivro").val(response.generoLivro);
+			$("#editoraLivro").val(response.editoraLivro);
+			$("#edicaoLivro").val(response.edicaoLivro);
+			$("#isbnLivro").val(response.isbnLivro);
+			$("#paginasLivro").val(response.paginasLivro);	
+		},error:	function(response){			
+			$.notify({
+				// options
+				message: 'Erro na operação, contato um administrador.' 
+			},{
+				// settings
+				type: 'danger',
+				placement: {
+					from: "top",
+					align: "center"
+				}
+			});
+		}
+    });
+	
+	$('#modaltst').modal('show');
+}
 
 function validaForm(){
 	

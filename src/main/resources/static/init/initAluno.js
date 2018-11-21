@@ -143,25 +143,25 @@ $(document).ready(function() {
 	});
 	
 	$.ajax({
-    url: 'http://localhost:8080/curso/findAll',
-    async: true,
-	type: 'GET',
-	contentType: "application/json",
-	success:function(data){
-		
-        console.log(data)
+	    url: 'http://localhost:8080/curso/findAll',
+	    async: true,
+		type: 'GET',
+		contentType: "application/json",
+		success:function(data){
 			
-		$.each(data, function (i, item) {
-            $('#curso').append($('<option>', { 
-                value: item.idCurso,
-                text : item.nomeCurso 
-            }));
-        });
-	},
-	error: function(data){			
-		alunos = [];
-	}
-});
+	        console.log(data)
+				
+			$.each(data, function (i, item) {
+	            $('#curso').append($('<option>', { 
+	                value: item.idCurso,
+	                text : item.nomeCurso 
+	            }));
+	        });
+		},
+		error: function(data){			
+			alunos = [];
+		}
+	});
 	
 	$("#udpate").click(function() {
 		var obj;
@@ -172,7 +172,7 @@ $(document).ready(function() {
     		type: 'GET',
     		contentType: "application/json",
     		success:function(response){
-    			obj = response;
+    			
     		},error:	function(response){			
     			$.notify({
     				// options
@@ -185,54 +185,56 @@ $(document).ready(function() {
     					align: "center"
     				}
     			});
-    		}
-        });
-		
-		
-		var aluno = '{'
-			+'"idAluno": '+parseInt(obj.idModal)+','
-	        +'"nomeAluno": "'+ obj.nameModal+'",'
-	        +'"idCurso": '+parseInt(obj.cursoModal)+','
-	        +'"emailAluno": "'+ obj.emailModal+'",'
-	        +'"dtAluno": "'+obj.dtNascModal+'",'
-	        +'"cpfAluno": "'+ obj.cpfModal+'",'
-	        +'"rgAluno": "'+ obj.rgModal+'",'
-	        +'"raAluno": "'+ obj.raModal+'",'
-	        +'"sexoAluno": "'+ obj.sexoModal+'",'
-	        +'"foneAluno": "'+ obj.telModal+'"'
-	        +'}';
-		
-		$.ajax({
-    	    url: 'http://localhost:8080/aluno/updateById',
-    	    async: true,
-    		type: 'POST',
-    		data: aluno,
-    		contentType: "application/json",
-    		success:function(response){
-    			$.notify({
-    				// options
-    				message: 'Aluno alterado!' 
-    			},{
-    				// settings
-    				type: 'info',
-    				placement: {
-    					from: "top",
-    					align: "center"
-    				}
-    			});
-    			location.reload();
-    		},error:	function(response){			
-    			$.notify({
-    				// options
-    				message: 'Erro na operação, contato um administrador.' 
-    			},{
-    				// settings
-    				type: 'danger',
-    				placement: {
-    					from: "top",
-    					align: "center"
-    				}
-    			});
+    		},complete:function(data){
+    			
+    			var response = data.responseJSON;
+    			var aluno = '{'
+    				+'"idAluno": '+parseInt($("#idModal").val())+','
+    		        +'"nomeAluno": "'+ $("#nameModal").val()+'",'
+    		        +'"idCurso": '+parseInt(response.idCurso)+','
+    		        +'"emailAluno": "'+ $("#emailModal").val()+'",'
+    		        +'"dtAluno": "'+$("#dtNascModal").val()+'",'
+    		        +'"cpfAluno": "'+ $("#cpfModal").val()+'",'
+    		        +'"rgAluno": "'+ $("#rgModal").val()+'",'
+    		        +'"raAluno": "'+ $("#raModal").val()+'",'
+    		        +'"sexoAluno": "'+ $("#sexoModal").val()+'",'
+    		        +'"foneAluno": "'+ $("#telModal").val()+'"'
+    		        +'}';
+    			
+    			$.ajax({
+    	    	    url: 'http://localhost:8080/aluno/updateById',
+    	    	    async: false ,
+    	    		type: 'POST',
+    	    		data: aluno,
+    	    		contentType: "application/json",
+    	    		success:function(response){
+    	    			$.notify({
+    	    				// options
+    	    				message: 'Aluno alterado!' 
+    	    			},{
+    	    				// settings
+    	    				type: 'info',
+    	    				placement: {
+    	    					from: "top",
+    	    					align: "center"
+    	    				}
+    	    			});
+    	    			$("#cancel").click();
+//    	    			location.reload();
+    	    		},error:	function(response){			
+    	    			$.notify({
+    	    				// options
+    	    				message: 'Erro na operação, contato um administrador.' 
+    	    			},{
+    	    				// settings
+    	    				type: 'danger',
+    	    				placement: {
+    	    					from: "top",
+    	    					align: "center"
+    	    				}
+    	    			});
+    	    		}
+    	        });
     		}
         });
 		
@@ -254,7 +256,7 @@ $(document).ready(function() {
 	        +'}';
 		
 		$.ajax({
-    	    url: 'http://localhost:8080/aluno/deleteDyId/'+parseInt($("#idModal").val()),
+    	    url: 'http://localhost:8080/aluno/deleteById/'+parseInt($("#idModal").val()),
     	    async: true,
     		type: 'DELETE',
     		contentType: "application/json",
@@ -290,17 +292,40 @@ $(document).ready(function() {
 });
 
 function openModal(obj){
-	var linha = $($(obj).parents('tr')).children()
-	$("#idModal").val(linha[0].innerText);
-	$("#nameModal").val(linha[1].innerText);
-	$("#cursoModal").val(	);
-	$("#emailModal").val(linha[3].innerText);
-	$("#dtNascModal").val(linha[4].innerText);
-	$("#cpfModal").val();
-	$("#rgModal").val();
-	$("#raModal").val();
-	$("#sexoModal").val();
-	$("#telModal").val();
+	
+	var linha = $($(obj).parents('tr')).children();
+	
+	$.ajax({
+	    url: 'http://localhost:8080/aluno/findById/'+parseInt(linha[0].innerText),
+	    async: true,
+		type: 'GET',
+		contentType: "application/json",
+		success:function(response){
+			$("#idModal").val(response.idAluno);
+			$("#nameModal").val(response.nomeAluno);
+			$("#cursoModal").val(response.idCurso);
+			$("#emailModal").val(response.emailAluno);
+			$("#dtNascModal").val(response.dtAluno);
+			$("#cpfModal").val(response.cpfAluno);
+			$("#rgModal").val(response.rgAluno);
+			$("#raModal").val(response.raAluno);
+			$("#sexoModal").val(response.sexoAluno);
+			$("#telModal").val(response.foneAluno);	
+		},error:	function(response){			
+			$.notify({
+				// options
+				message: 'Erro na operação, contato um administrador.' 
+			},{
+				// settings
+				type: 'danger',
+				placement: {
+					from: "top",
+					align: "center"
+				}
+			});
+		}
+    });
+	
 	
 	$('#modaltst').modal('show');
 }

@@ -31,8 +31,7 @@ $(document).ready(function() {
         {data: "idAluno", 		title: 'Aluno', "visible": true },
         {data: "idLivro", 		title: 'Livro', "visible": true },
         {data: "dataEmprestimo",title: 'Data Empréstimo', "visible": true },
-        {data: "dataDevolucao", title: 'Data Devolução Prevista', "visible": true },
-        {data: 'consultar',		title: "", "visible": true }
+        {data: "dataDevolucao", title: 'Data Devolução Prevista', "visible": true }
     ];
 	
 	$.ajax({
@@ -47,11 +46,6 @@ $(document).ready(function() {
 		        columns:		colunas,
 		        responsive: true,
 				columnDefs: [
-					{
-		                  "targets": 5,
-		                  "data": null,
-		                  "defaultContent": "<span onClick='openModal(this)' id='editModal' class='fa fa-pencil-square-o fa-3'></span>"
-		              }
 				],
 		        rowCallback: function(row,data,index){
 		        	$.ajax({
